@@ -83,13 +83,6 @@ template <typename T, typename> void print_prime_factors(const T &n) {
   if (n <= 1)
     return;
 
-  T digit_count = 0;
-  {
-    T tmp = n;
-    for (; tmp > 10; tmp /= 10)
-      digit_count++;
-  }
-
   std::vector<T> primes = get_prime_factors(n);
 
   for (const T prime : primes)
@@ -146,14 +139,13 @@ std::vector<T> vec_difference(const std::vector<T> &a,
 
 template <typename T, typename>
 void print_mersenne_nums_in_interval(const T &begin, const T &end) {
-  if (begin <= 0 || end < begin)
+  if (begin <= 1 || end < begin)
     return;
+  std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
 
   std::cout << "{ ";
-  for (T i = begin; i <= end; i++) {
-    if (is_mersenne_prime(i)) {
-      std::cout << i << " ";
-    }
+  for (const T &num : nums) {
+    std::cout << num << " ";
   }
   std::cout << "}" << std::endl;
 
@@ -165,18 +157,29 @@ void print_mersenne_nums_in_interval(const T &begin, const T &end) {
 // -----------------------------------------------------------------------------
 
 template <typename T, typename>
-void print_first_n_amount_of_mersenne_nums(T n) {
-  T counter = 0;
+std::vector<T> get_first_n_amount_of_mersenne_nums(T n) {
+  std::vector<T> res;
   if (n < 2)
-    return;
-  if (n == 2)
-    std::cout << "{ " << 2 << " }" << std::endl;
+    return res;
 
-  std::cout << "{ ";
-  for (unsigned long long i = 0b11; counter < n; i = (i << 1) + 1) {
-    std::cout << i << " ";
-    counter++;
+  res.push_back(2);
+  T counter = 0;
+  for (unsigned long long i = 0b11; counter <= n; i = (i << 1) + 1, counter++) {
+    res.pop_back(i);
   }
+
+  return res;
+}
+
+template <typename T, typename>
+void print_first_n_amount_of_mersenne_nums(T n) {
+  std::cout << "{ " << 2 << " ";
+  std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
+
+  for (const T &num : nums) {
+    std::cout << num << " ";
+  }
+
   std::cout << "}" << std::endl;
 
   return;
@@ -187,14 +190,30 @@ void print_first_n_amount_of_mersenne_nums(T n) {
 // -----------------------------------------------------------------------------
 
 template <typename T, typename>
-void print_first_n_amount_of_mersenne_prime_nums(T n) {
+std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n) {
+  std::vector<T> res;
+
+  if (n < 2)
+    return res;
+
   T counter = 0;
-  std::cout << "{ ";
-  for (unsigned long long i = 0b11; counter != n; i = (i << 1) + 1) {
+
+  for (unsigned long long i = 0b11; counter != n; i = (i << 1) + 1, counter++) {
     if (is_prime(i)) {
-      std::cout << i << " ";
-      counter++;
+      res.push_back(i);
     }
+  }
+
+  return res;
+}
+
+template <typename T, typename>
+void print_first_n_amount_of_mersenne_prime_nums(T n) {
+  std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
+
+  std::cout << "{ ";
+  for (const T &num : nums) {
+    std::cout << num << " ";
   }
   std::cout << "}" << std::endl;
 
@@ -206,24 +225,16 @@ void print_first_n_amount_of_mersenne_prime_nums(T n) {
 // -----------------------------------------------------------------------------
 
 template <typename T, typename>
-std::vector<T> get_mersenne_nums_from_interval(const T &begin, const T &end) {
+std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> res;
 
-  if (begin > end || end <= 2)
+  if (begin <= 1 || end < begin)
     return res;
 
-  // Skip even numbers.
+  res.push_back(2);
 
-  T new_begin = begin;
-  if (begin % 2 == 0)
-    new_begin = begin + 1;
-  if (begin <= 2)
-    new_begin = 3;
-
-  for (int i = new_begin; i <= end; i += 1) {
-    if (is_mersenne(i)) {
-      res.push_back(i);
-    }
+  for (T i = 0b11; i <= end; i = (i << 1) + 1) {
+    res.push_back(i);
   }
 
   return res;
@@ -236,7 +247,7 @@ std::vector<T> get_mersenne_nums_from_interval(const T &begin, const T &end) {
 template <typename T, typename> bool is_perfect(T n) {
   // Credit: https://www.geeksforgeeks.org/perfect-number/
 
-  if (n <= 1)
+  if (n <= 5)
     return false;
 
   unsigned long long sum = 1;
@@ -261,16 +272,13 @@ std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
 
   res.push_back(6);
 
-  if (end < 28)
+  T second_perfect_number = 28;
+  if (end < second_perfect_number)
     return res;
 
-  res.push_back(28);
+  res.push_back(second_perfect_number);
 
-  T new_begin = begin;
-  if (begin < 29)
-    new_begin = 29;
-
-  for (int i = new_begin; i <= end; i++) {
+  for (int i = second_perfect_number + 1; i <= end; i++) {
     if (is_perfect(i)) {
       res.push_back(i);
     }

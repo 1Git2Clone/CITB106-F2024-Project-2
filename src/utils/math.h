@@ -11,14 +11,22 @@
 // -----------------------------------------------------------------------------
 
 /**
+ * Check if a number is a mersenne number.
+ * The mersenne form is M(n) = 2^n - 1.[1]
  *
+ * NOTE: without necessarily checking for primeness.
+ *
+ * [1]: https://en.wikipedia.org/wiki/Mersenne_prime
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
 bool is_mersenne(const T &n);
 
 /**
+ * Checks if a number is a prime number[1] using the trial division method[2].
  *
+ * [1]: https://en.wikipedia.org/wiki/Prime_number
+ * [2]: https://en.wikipedia.org/wiki/Prime_number#Trial_division
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -29,7 +37,12 @@ bool is_prime(const T &n);
 // -----------------------------------------------------------------------------
 
 /**
+ * Checks if a number is a mersenne prime[1].
  *
+ * Under the hood this is just a wrapper that returns `is_prime()` &&
+ * `is_mersenne()`.
+ *
+ * [1]: https://en.wikipedia.org/wiki/Mersenne_prime
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -40,7 +53,8 @@ bool is_mersenne_prime(const T &n);
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Prints all the divisors of a number `n` that are greater than `1` and less
+ * than `n`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -62,7 +76,8 @@ template <typename T, typename = typename std::enable_if<
 std::vector<T> get_prime_factors(const T &n);
 
 /**
- *
+ * Gets all the prime fractors from the `get_prime_factors` function and prints
+ * them to `stdout`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -73,21 +88,24 @@ void print_prime_factors(const T &n);
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
 std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b);
 
 /**
- *
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
 std::vector<T> vec_difference(const std::set<T> &a, const std::set<T> &b);
 
 /**
- *
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -98,7 +116,7 @@ std::vector<T> vec_difference(const std::vector<T> &a, const std::vector<T> &b);
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Prints all the non-prime mersene numbers from `begin` to `end`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -109,7 +127,14 @@ void print_mersenne_nums_in_interval(const T &begin = 2, const T &end = 2);
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Gets the first `n` amount of mersenne numbers.
+ */
+template <typename T, typename = typename std::enable_if<
+                          std::is_arithmetic<T>::value, T>::type>
+std::vector<T> get_first_n_amount_of_mersenne_nums(T n);
+
+/**
+ * Prints the first `n` amount of mersenne numbers.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -120,7 +145,14 @@ void print_first_n_amount_of_mersenne_nums(T n);
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Gets the first `n` amount of mersenne prime numbers.
+ */
+template <typename T, typename = typename std::enable_if<
+                          std::is_arithmetic<T>::value, T>::type>
+std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n);
+
+/**
+ * Prints the first `n` amount of mersenne prime numbers.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
@@ -128,29 +160,32 @@ void print_first_n_amount_of_mersenne_prime_nums(T n);
 
 // -----------------------------------------------------------------------------
 // Task 9
+//
+// NOTE: Also used in order to print the mersenne numbers in task 6.
+//
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Gets all the non-prime mersene numbers from `begin` to `end`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-std::vector<T> get_mersenne_nums_from_interval(const T &begin = 2,
-                                               const T &end = 2);
+std::vector<T> get_mersenne_nums_in_interval(const T &begin = 2,
+                                             const T &end = 2);
 
 // -----------------------------------------------------------------------------
 // Task 10
 // -----------------------------------------------------------------------------
 
 /**
- *
+ * Checks if a number is a perfect number.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
 bool is_perfect(T n);
 
 /**
- *
+ * Gets all the perfect numbers from `begin` to `end`.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
