@@ -165,7 +165,7 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(T n) {
   res.push_back(2);
   T counter = 0;
   for (unsigned long long i = 0b11; counter <= n; i = (i << 1) + 1, counter++) {
-    res.pop_back(i);
+    res.push_back(i);
   }
 
   return res;
@@ -198,9 +198,10 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n) {
 
   T counter = 0;
 
-  for (unsigned long long i = 0b11; counter != n; i = (i << 1) + 1, counter++) {
+  for (unsigned long long i = 0b11; counter != n; i = (i << 1) + 1) {
     if (is_prime(i)) {
       res.push_back(i);
+      counter++;
     }
   }
 
