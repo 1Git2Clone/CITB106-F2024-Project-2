@@ -48,7 +48,7 @@ void test_difference() {
 }
 
 void test_mersenne_numbers() {
-  std::vector<int> mersenne_a = get_mersenne_nums_from_interval(3, 2047);
+  std::vector<int> mersenne_a = get_mersenne_nums_in_interval(3, 2047);
   std::vector<int> expected_mersenne = {3,   7,   15,  31,   63,
                                         127, 255, 511, 1023, 2047};
 
