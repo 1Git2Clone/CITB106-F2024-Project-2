@@ -12,6 +12,7 @@ TEST(PrimeFactorsTest, Assertions) {
                                                  13, 17, 19, 23, 29};
   ASSERT_EQ(prime_factors, expected_factors);
 }
+
 TEST(PrimeFactorsTest, EdgeCases) {
   unsigned long of = 0;
   std::vector<unsigned long> prime_factors = get_prime_factors(of);
