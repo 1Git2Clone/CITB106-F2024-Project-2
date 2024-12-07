@@ -17,11 +17,11 @@ The project requires [`cmake`](https://cmake.org/) to setup conventionally
 ### Via CMake
 
 ```sh
-cd build
-cmake ..
-./main_exec  # For the src/main.cpp file.
-./test_exec  # For the src/test.cpp file.
-ctest -C Release  # Alternative for running the tests.
+cmake -B build
+cmake --build build
+./build/test/all_tests
+ctest  # This is an alternative but since this project uses gtest, the display
+       # of the tests will be worse.
 ```
 
 ### Manually
