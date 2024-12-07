@@ -10,7 +10,7 @@
 // Task 1
 // -----------------------------------------------------------------------------
 
-template <typename T, typename> bool is_mersenne(const T &n) {
+template <typename T> bool is_mersenne(const T &n) {
   return n >= 0 && ((n + 1) & n) == 0;
 }
 
@@ -21,7 +21,7 @@ template <typename T, typename> bool is_mersenne(const T &n) {
 /**
  * Implementation is done via the trial division method in order to save space.
  */
-template <typename T, typename> bool is_prime(const T &n) {
+template <typename T> bool is_prime(const T &n) {
   if (n <= 1)
     return false;
   if (n <= 3)
@@ -37,7 +37,7 @@ template <typename T, typename> bool is_prime(const T &n) {
   return true;
 }
 
-template <typename T, typename> bool is_mersenne_prime(const T &n) {
+template <typename T> bool is_mersenne_prime(const T &n) {
   return is_prime(n) && is_mersenne(n);
 }
 
@@ -45,7 +45,7 @@ template <typename T, typename> bool is_mersenne_prime(const T &n) {
 // Task 3
 // -----------------------------------------------------------------------------
 
-template <typename T, typename> void print_divisors(const T &n) {
+template <typename T> void print_divisors(const T &n) {
   if (n <= 1)
     return;
 
@@ -60,7 +60,7 @@ template <typename T, typename> void print_divisors(const T &n) {
 // Task 4
 // -----------------------------------------------------------------------------
 
-template <typename T, typename> std::vector<T> get_prime_factors(const T &n) {
+template <typename T> std::vector<T> get_prime_factors(const T &n) {
   T n_sqrt = sqrt(n);
   std::vector<bool> is_prime(n_sqrt + 2, true);
   std::vector<T> primes;
@@ -79,7 +79,7 @@ template <typename T, typename> std::vector<T> get_prime_factors(const T &n) {
   return primes;
 }
 
-template <typename T, typename> void print_prime_factors(const T &n) {
+template <typename T> void print_prime_factors(const T &n) {
   if (n <= 1)
     return;
 
@@ -97,7 +97,7 @@ template <typename T, typename> void print_prime_factors(const T &n) {
 // Task 5
 // -----------------------------------------------------------------------------
 
-template <typename T, typename>
+template <typename T>
 std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b) {
   std::set<T> res;
 
@@ -108,7 +108,7 @@ std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b) {
   return res;
 }
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> vec_difference(const std::set<T> &a, const std::set<T> &b) {
   std::vector<T> res(a.size());
   typename std::vector<T>::iterator it;
@@ -120,7 +120,7 @@ std::vector<T> vec_difference(const std::set<T> &a, const std::set<T> &b) {
   return res;
 }
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> vec_difference(const std::vector<T> &a,
                               const std::vector<T> &b) {
   std::vector<T> res(a.size());
@@ -137,7 +137,7 @@ std::vector<T> vec_difference(const std::vector<T> &a,
 // Task 6
 // -----------------------------------------------------------------------------
 
-template <typename T, typename>
+template <typename T>
 void print_mersenne_nums_in_interval(const T &begin, const T &end) {
   if (begin <= 1 || end < begin)
     return;
@@ -156,7 +156,7 @@ void print_mersenne_nums_in_interval(const T &begin, const T &end) {
 // Task 7
 // -----------------------------------------------------------------------------
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> res;
   if (n < 2)
@@ -171,8 +171,7 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   return res;
 }
 
-template <typename T, typename>
-void print_first_n_amount_of_mersenne_nums(const T &n) {
+template <typename T> void print_first_n_amount_of_mersenne_nums(const T &n) {
   std::cout << "{ " << 2 << " ";
   std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
 
@@ -189,7 +188,7 @@ void print_first_n_amount_of_mersenne_nums(const T &n) {
 // Task 8
 // -----------------------------------------------------------------------------
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res;
 
@@ -208,7 +207,7 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   return res;
 }
 
-template <typename T, typename>
+template <typename T>
 void print_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
 
@@ -225,7 +224,7 @@ void print_first_n_amount_of_mersenne_prime_nums(const T &n) {
 // Task 9
 // -----------------------------------------------------------------------------
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> res;
 
@@ -245,7 +244,7 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
 // Task 10
 // -----------------------------------------------------------------------------
 
-template <typename T, typename> bool is_perfect(const T &n) {
+template <typename T> bool is_perfect(const T &n) {
   // Credit: https://www.geeksforgeeks.org/perfect-number/
 
   if (n <= 5)
@@ -262,7 +261,7 @@ template <typename T, typename> bool is_perfect(const T &n) {
   return sum == n;
 }
 
-template <typename T, typename>
+template <typename T>
 std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
   std::vector<T> res;
   if (begin > end)
