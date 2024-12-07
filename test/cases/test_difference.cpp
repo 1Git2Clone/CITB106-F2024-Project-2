@@ -1,3 +1,4 @@
+#include "./test_difference.h"
 #include "../../src/utils/math.cpp"
 #include <gtest/gtest.h>
 
