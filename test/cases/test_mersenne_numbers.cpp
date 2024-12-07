@@ -4,7 +4,7 @@
 
 TEST(MersenneNumbersTest, Assertions) {
   const int begin = 3;
-  const int end = 2047;
+  const int end = 2048;
   const int n = 9;
 
   std::vector<int> mersenne_a = get_mersenne_nums_in_interval(begin, end);

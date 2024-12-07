@@ -109,7 +109,7 @@ std::vector<T> vec_difference(const std::vector<T> &a, const std::vector<T> &b);
  */
 template <Integer T>
 std::vector<T> print_mersenne_nums_in_interval(const T &begin = 2,
-                                               const T &end = 2);
+                                               const T &end = 3);
 
 // -----------------------------------------------------------------------------
 // Task 7
@@ -155,7 +155,7 @@ std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n);
  */
 template <Integer T>
 std::vector<T> get_mersenne_nums_in_interval(const T &begin = 2,
-                                             const T &end = 2);
+                                             const T &end = 3);
 
 // -----------------------------------------------------------------------------
 // Task 10
@@ -171,13 +171,13 @@ template <Integer T> bool is_perfect(const T &n);
  */
 template <Integer T>
 std::vector<T>
-get_perfect_nums_from_range(const std::ranges::iota_view<T, T> &range);
+get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range);
 
 /**
  * Gets all the perfect numbers from `begin` to `end`.
  */
 template <Integer T>
-std::vector<T> get_perfect_nums_from_interval(const T &begin = 6,
-                                              const T &end = 6);
+std::vector<T> get_perfect_nums_in_interval(const T &begin = 6,
+                                            const T &end = 7);
 
 #endif // !UTILS_MATH_H

@@ -260,7 +260,7 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
 
   res.push_back(2);
 
-  for (T i = 0b11; i <= end; i = (i << 1) + 1) {
+  for (T i = 0b11; i < end; i = (i << 1) + 1) {
     res.push_back(i);
   }
 
@@ -290,7 +290,7 @@ template <typename T> bool is_perfect(const T &n) {
 
 template <typename T>
 std::vector<T>
-get_perfect_nums_from_range(const std::ranges::iota_view<T, T> &range) {
+get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
 
   std::vector<T> res;
   std::function<bool(const T)> is_perfect_n = [](const T &n) {
@@ -310,8 +310,8 @@ get_perfect_nums_from_range(const std::ranges::iota_view<T, T> &range) {
 }
 
 template <typename T>
-std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
+std::vector<T> get_perfect_nums_in_interval(const T &begin, const T &end) {
   std::ranges::iota_view<T, T> range =
-      std::ranges::views::iota(begin, (T)(end + 1));
-  return get_perfect_nums_from_range(range);
+      std::ranges::views::iota(begin, (T)(end));
+  return get_perfect_nums_in_range(range);
 }
