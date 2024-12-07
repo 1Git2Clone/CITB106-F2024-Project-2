@@ -191,8 +191,8 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
     return res;
 
   res.push_back(2);
-  T counter = 0;
-  for (unsigned long long i = 0b11; counter <= n; i = (i << 1) + 1, counter++) {
+  T counter = 1;
+  for (unsigned long long i = 0b11; counter < n; i = (i << 1) + 1, counter++) {
     res.push_back(i);
   }
 
@@ -255,7 +255,8 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   if (end < begin)
     return res;
 
-  res.push_back(2);
+  if (begin >= 2)
+    res.push_back(2);
 
   for (T i = 0b11; i < end; i = (i << 1) + 1) {
     if (i < begin)

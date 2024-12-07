@@ -2,20 +2,56 @@
 #include "../../src/utils/math.cpp"
 #include <gtest/gtest.h>
 
-TEST(MersenneNumbersTest, Assertions) {
+TEST(MersenneNumbersTest, Interval) {
   const int begin = 3;
   const int end = 2048;
-  const int n = 9;
 
-  std::vector<int> mersenne_a = get_mersenne_nums_in_interval(begin, end);
+  std::vector<int> mersenne_in = get_mersenne_nums_in_interval(begin, end);
   std::vector<int> expected_mersenne = {2,   3,   7,   15,   31,  63,
                                         127, 255, 511, 1023, 2047};
 
-  ASSERT_EQ(mersenne_a, expected_mersenne);
+  ASSERT_EQ(mersenne_in, expected_mersenne);
 
-  std::vector<int> first_nine_mersenne_numbers =
+  return;
+}
+
+TEST(MersenneNumbersTest, NAmount) {
+  const int n = 11;
+
+  std::vector<int> expected_mersenne = {2,   3,   7,   15,   31,  63,
+                                        127, 255, 511, 1023, 2047};
+
+  ASSERT_EQ(expected_mersenne.size(), n);
+
+  std::vector<int> first_n_mersenne_numbers =
       get_first_n_amount_of_mersenne_nums(n);
-  ASSERT_EQ(mersenne_a, first_nine_mersenne_numbers);
+
+  ASSERT_EQ(first_n_mersenne_numbers, expected_mersenne);
+
+  return;
+}
+
+TEST(MersenneNumbersTest, EdgeCases) {
+  const int begin = 0;
+  const int end = 0;
+
+  std::vector<int> mersenne_in = get_mersenne_nums_in_interval(begin, end);
+  std::vector<int> expected_mersenne = {};
+
+  ASSERT_EQ(mersenne_in, expected_mersenne);
+
+  return;
+}
+
+TEST(MersenneNumbersTest, HighLowEdgeCase) {
+  const long long begin = 999'999'999'999'999'999;
+  const long long end = -999'999'999'999'999'999;
+
+  std::vector<long long> mersenne_in =
+      get_mersenne_nums_in_interval(begin, end);
+  std::vector<long long> expected_mersenne = {};
+
+  ASSERT_EQ(mersenne_in, expected_mersenne);
 
   return;
 }
