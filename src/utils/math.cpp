@@ -309,9 +309,8 @@ get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
   };
 
   // clang-format off
-  for (const T &i
-       : range
-       | std::ranges::views::filter(is_perfect_n)) {
+  for (const T &i : range
+                  | std::ranges::views::filter(is_perfect_n)) {
     res.push_back(i);
   }
   // clang-format on
