@@ -61,7 +61,7 @@ bool is_mersenne_prime(const T &n);
  */
 template <typename T>
   requires integer<T>
-void print_divisors(const T &n);
+std::vector<T> print_divisors(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 4
@@ -84,7 +84,7 @@ std::vector<T> get_prime_factors(const T &n);
  */
 template <typename T>
   requires integer<T>
-void print_prime_factors(const T &n);
+std::vector<T> print_prime_factors(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 5
@@ -123,7 +123,8 @@ std::vector<T> vec_difference(const std::vector<T> &a, const std::vector<T> &b);
  */
 template <typename T>
   requires integer<T>
-void print_mersenne_nums_in_interval(const T &begin = 2, const T &end = 2);
+std::vector<T> print_mersenne_nums_in_interval(const T &begin = 2,
+                                               const T &end = 2);
 
 // -----------------------------------------------------------------------------
 // Task 7
@@ -141,7 +142,7 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n);
  */
 template <typename T>
   requires integer<T>
-void print_first_n_amount_of_mersenne_nums(const T &n);
+std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 8
@@ -159,7 +160,7 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n);
  */
 template <typename T>
   requires integer<T>
-void print_first_n_amount_of_mersenne_prime_nums(const T &n);
+std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 9

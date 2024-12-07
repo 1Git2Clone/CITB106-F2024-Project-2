@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <ranges>
 #include <set>
 #include <vector>
 
@@ -45,15 +46,37 @@ template <typename T> bool is_mersenne_prime(const T &n) {
 // Task 3
 // -----------------------------------------------------------------------------
 
-template <typename T> void print_divisors(const T &n) {
+template <typename T> std::vector<T> get_divisors(const T &n) {
+  std::vector<T> res;
   if (n <= 1)
-    return;
+    return res;
 
-  for (T i = 2; i < n; i++)
-    if (n % i == 0)
-      printf("%d\n", i);
+  auto div_by_i = [n](const T &i) { return n % i == 0; };
 
-  return;
+  // clang-format off
+  //
+  // For reference[1].
+  // NOTE: This is the formatting they use in the official documentation[2].
+  //
+  // [1]: https://stackoverflow.com/questions/70942638/tweaking-clang-format-for-c20-ranges-pipelines/75283554#75283554
+  // [2]: https://en.cppreference.com/w/cpp/ranges/filter_view#Example
+  for (const T &i : std::ranges::views::iota((T)2, (T)n)
+                  | std::ranges::views::filter(div_by_i)) {
+    res.push_back(i);
+  }
+  // clang-format on
+
+  return res;
+}
+
+template <typename T> std::vector<T> print_divisors(const T &n) {
+  std::vector<T> nums = get_divisors(n);
+
+  std::cout << "{ ";
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  std::cout << " }" << std::endl;
+
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
@@ -61,11 +84,26 @@ template <typename T> void print_divisors(const T &n) {
 // -----------------------------------------------------------------------------
 
 template <typename T> std::vector<T> get_prime_factors(const T &n) {
+  if (n <= 1)
+    return std::vector<T>();
+  if (is_prime(n))
+    return std::vector<T>{n};
+
+  std::vector<T> primes;
+  if (n <= 8) {
+    // sqrt(n) < 3
+    if (n % 2 == 0)
+      primes.push_back(2);
+    if (n % 3 == 0)
+      primes.push_back(3);
+
+    return primes;
+  }
+
   T n_sqrt = sqrt(n);
   std::vector<bool> is_prime(n_sqrt + 2, true);
-  std::vector<T> primes;
 
-  for (T i = 2; i <= n_sqrt; i++) {
+  for (const T &i : std::ranges::views::iota((T)2, (T)(n_sqrt + 1))) {
     if (is_prime[i]) {
       if (n % i == 0) {
         primes.push_back(i);
@@ -74,23 +112,19 @@ template <typename T> std::vector<T> get_prime_factors(const T &n) {
         is_prime[j] = false;
       }
     }
-  }
+  };
 
   return primes;
 }
 
-template <typename T> void print_prime_factors(const T &n) {
-  if (n <= 1)
-    return;
+template <typename T> std::vector<T> print_prime_factors(const T &n) {
+  std::vector<T> nums = get_prime_factors(n);
 
-  std::vector<T> primes = get_prime_factors(n);
+  std::cout << "{ ";
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  std::cout << "}" << std::endl;
 
-  for (const T prime : primes)
-    std::cout << prime << " ";
-
-  std::cout << std::endl;
-
-  return;
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
@@ -138,18 +172,14 @@ std::vector<T> vec_difference(const std::vector<T> &a,
 // -----------------------------------------------------------------------------
 
 template <typename T>
-void print_mersenne_nums_in_interval(const T &begin, const T &end) {
-  if (begin <= 1 || end < begin)
-    return;
+std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
 
   std::cout << "{ ";
-  for (const T &num : nums) {
-    std::cout << num << " ";
-  }
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
   std::cout << "}" << std::endl;
 
-  return;
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
@@ -171,17 +201,15 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   return res;
 }
 
-template <typename T> void print_first_n_amount_of_mersenne_nums(const T &n) {
-  std::cout << "{ " << 2 << " ";
+template <typename T>
+std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
 
-  for (const T &num : nums) {
-    std::cout << num << " ";
-  }
-
+  std::cout << "{ ";
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
   std::cout << "}" << std::endl;
 
-  return;
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
@@ -208,16 +236,14 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
 }
 
 template <typename T>
-void print_first_n_amount_of_mersenne_prime_nums(const T &n) {
+std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
 
   std::cout << "{ ";
-  for (const T &num : nums) {
-    std::cout << num << " ";
-  }
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
   std::cout << "}" << std::endl;
 
-  return;
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
@@ -278,11 +304,14 @@ std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
 
   res.push_back(second_perfect_number);
 
-  for (int i = second_perfect_number + 1; i <= end; i++) {
-    if (is_perfect(i)) {
-      res.push_back(i);
-    }
+  auto is_perfect_n = [](const T &n) { return is_perfect(n); };
+  // clang-format off
+  for (const T &i
+       : std::ranges::views::iota((T)(second_perfect_number + 1), (T)(end + 1))
+       | std::ranges::views::filter(is_perfect_n)) {
+    res.push_back(i);
   }
+  // clang-format on
 
   return res;
 }
