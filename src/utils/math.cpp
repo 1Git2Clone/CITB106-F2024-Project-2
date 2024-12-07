@@ -1,7 +1,6 @@
-#include "math.h"
-
 #include <algorithm>
 #include <cmath>
+#include <functional>
 #include <iostream>
 #include <ranges>
 #include <set>
@@ -51,7 +50,9 @@ template <typename T> std::vector<T> get_divisors(const T &n) {
   if (n <= 1)
     return res;
 
-  auto div_by_i = [n](const T &i) { return n % i == 0; };
+  std::function<bool(const T)> div_by_i = [n](const T &i) {
+    return n % i == 0;
+  };
 
   // clang-format off
   //
@@ -288,30 +289,29 @@ template <typename T> bool is_perfect(const T &n) {
 }
 
 template <typename T>
-std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
+std::vector<T>
+get_perfect_nums_from_range(const std::ranges::iota_view<T, T> &range) {
+
   std::vector<T> res;
-  if (begin > end)
-    return res;
-
-  if (end < 6)
-    return res;
-
-  res.push_back(6);
-
-  T second_perfect_number = 28;
-  if (end < second_perfect_number)
-    return res;
-
-  res.push_back(second_perfect_number);
-
-  auto is_perfect_n = [](const T &n) { return is_perfect(n); };
+  std::function<bool(const T)> is_perfect_n = [](const T &n) {
+    return is_perfect(n);
+  };
   // clang-format off
   for (const T &i
-       : std::ranges::views::iota((T)(second_perfect_number + 1), (T)(end + 1))
+       : range
        | std::ranges::views::filter(is_perfect_n)) {
     res.push_back(i);
   }
   // clang-format on
 
   return res;
+
+  return res;
+}
+
+template <typename T>
+std::vector<T> get_perfect_nums_from_interval(const T &begin, const T &end) {
+  std::ranges::iota_view<T, T> range =
+      std::ranges::views::iota(begin, (T)(end + 1));
+  return get_perfect_nums_from_range(range);
 }
