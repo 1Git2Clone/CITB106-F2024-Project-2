@@ -24,9 +24,13 @@ template <typename T, typename> bool is_mersenne(const T &n) {
 template <typename T, typename> bool is_prime(const T &n) {
   if (n <= 1)
     return false;
+  if (n <= 3)
+    return true;
+  if (n % 2 == 0 || n % 3 == 0)
+    return false;
 
-  for (T i = 2; i <= sqrt(n); i++) {
-    if (n % i == 0)
+  for (T i = 5; i * i <= n; i += 6) {
+    if (n % i == 0 || n % (i + 2) == 0)
       return false;
   }
 
