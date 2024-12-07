@@ -11,6 +11,7 @@ const char *PRINT_SUCCESS = "YES";
 
 void test_get_prime_factors() {
   print_heading("Test prime factors");
+
   int of = 18200;
   std::vector<int> prime_factors = get_prime_factors(of);
   std::vector<int> expected_factors = {2, 5, 7, 13};
@@ -64,14 +65,31 @@ void test_difference() {
 
 void test_mersenne_numbers() {
   print_heading("Test mersenne numbers");
+  const int begin = 3;
+  const int end = 2047;
+  const int n = 9;
 
   std::cout << SAME_VEC << std::endl;
-  std::vector<int> mersenne_a = get_mersenne_nums_in_interval(3, 2047);
+  std::vector<int> mersenne_a = get_mersenne_nums_in_interval(begin, end);
   std::vector<int> expected_mersenne = {2,   3,   7,   15,   31,  63,
                                         127, 255, 511, 1023, 2047};
 
   assert(mersenne_a == expected_mersenne);
   std::cout << PRINT_SUCCESS << std::endl;
+
+  std::vector<int> first_nine_mersenne_numbers =
+      get_first_n_amount_of_mersenne_nums(n);
+  std::cout << "Make sure the mersenne numbers in the range: [" << begin << ';'
+            << end << "] match the first " << n << " mersenne numbers."
+            << std::endl;
+  assert(mersenne_a == first_nine_mersenne_numbers);
+  std::cout << PRINT_SUCCESS << std::endl;
+
+  return;
+}
+
+void test_mersenne_prime_numbers() {
+  print_heading("Test mersenne prime numbers");
 
   std::cout << SAME_VEC << std::endl;
   std::cout << "NOTE: This is for the first 9 mersenne primes so it's slow."
@@ -92,6 +110,20 @@ void test_mersenne_numbers() {
 
   assert(first_nine_mersenne_primes == expected_first_nine_mersenne_primes);
   std::cout << PRINT_SUCCESS << std::endl;
+
+  std::cout << "Test is_mersenne_prime for mersenne **non-prime** numbers"
+            << std::endl;
+  assert(is_mersenne_prime(15) == false);
+  assert(is_mersenne_prime(63) == false);
+  std::cout << PRINT_SUCCESS << std::endl;
+  std::cout
+      << "Test is_mersenne_prime and is_mersenne for mersenne **prime** numbers"
+      << std::endl;
+  assert(is_mersenne(8'191) == true);
+  assert(is_mersenne_prime(8'191) == true);
+  std::cout << PRINT_SUCCESS << std::endl;
+
+  return;
 }
 
 void test_perfect_numbers() {
@@ -108,14 +140,25 @@ void test_perfect_numbers() {
     assert(is_perfect(num));
   }
   std::cout << PRINT_SUCCESS << std::endl;
+
+  return;
 }
 
 int main(int argc, char *argv[]) {
+  // Some tests run for a while so it's easier to offload it on a different
+  // thread and let the other tests run concurrently as they aren't dependant
+  // on each other.
+  //
+  // NOTE: This means that the printing order will be messed up. If you're
+  // concerned about a specific test failing then run it by itself without
+  // having anything on the other threads.
+
   std::vector<std::thread> threads;
 
   threads.push_back(std::thread([]() { test_get_prime_factors(); }));
   threads.push_back(std::thread([]() { test_difference(); }));
   threads.push_back(std::thread([]() { test_mersenne_numbers(); }));
+  threads.push_back(std::thread([]() { test_mersenne_prime_numbers(); }));
   threads.push_back(std::thread([]() { test_perfect_numbers(); }));
 
   for (std::thread &t : threads) {
