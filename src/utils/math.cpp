@@ -136,9 +136,12 @@ template <typename T>
 std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b) {
   std::set<T> res;
 
-  for (const T &item : a)
-    if (b.find(item) == b.end())
-      res.insert(item);
+  std::function<bool(const T)> not_in_b = [b](const T &item) {
+    return b.find(item) == b.end();
+  };
+
+  for (const T &item : a | std::ranges::views::filter(not_in_b))
+    res.insert(item);
 
   return res;
 }
@@ -172,16 +175,10 @@ std::vector<T> vec_difference(const std::vector<T> &a,
 // Task 6
 // -----------------------------------------------------------------------------
 
+// NOTE: Implementation is done in a different place due to depending on a
+// different function.
 template <typename T>
-std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
-  std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
-
-  std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
-  std::cout << "}" << std::endl;
-
-  return nums;
-}
+std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end);
 
 // -----------------------------------------------------------------------------
 // Task 7
@@ -255,16 +252,29 @@ template <typename T>
 std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> res;
 
-  if (begin <= 1 || end < begin)
+  if (end < begin)
     return res;
 
   res.push_back(2);
 
   for (T i = 0b11; i < end; i = (i << 1) + 1) {
+    if (i < begin)
+      continue;
     res.push_back(i);
   }
 
   return res;
+}
+
+template <typename T>
+std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
+  std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
+
+  std::cout << "{ ";
+  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  std::cout << "}" << std::endl;
+
+  return nums;
 }
 
 // -----------------------------------------------------------------------------
