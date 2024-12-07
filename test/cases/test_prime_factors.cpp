@@ -38,4 +38,6 @@ TEST(PrimeFactorsTest, SeveralLowValueEdgeCase) {
 
   std::vector<int> of_eight = {2};
   ASSERT_EQ(prime_factors[6], of_eight);
+
+  return;
 }
