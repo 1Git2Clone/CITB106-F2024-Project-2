@@ -1,3 +1,6 @@
+#ifndef UTILS_HELPER_FUNCTIONS_CPP
+#define UTILS_HELPER_FUNCTIONS_CPP
+
 #include "helper_functions.h"
 #include <iostream>
 
@@ -58,3 +61,5 @@ template <typename T> void print_set(const std::set<T> &v, const char *msg) {
     std::cout << i << " ";
   std::cout << "}" << std::endl;
 }
+
+#endif // !UTILS_HELPER_FUNCTIONS_CPP
