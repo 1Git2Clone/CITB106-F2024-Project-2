@@ -18,7 +18,7 @@ TEST(PerfectNumbersTest, Assertions) {
   return;
 }
 
-TEST(PerfectNumbersTestRanges, Assertions) {
+TEST(PerfectNumbersTest, AssertionsWithRanges) {
   std::ranges::iota_view<int, int> range = std::ranges::views::iota(6, 8129);
   std::vector<int> perfect_nums = get_perfect_nums_in_range(range);
   std::vector<int> expected_perfect_nums = {6, 28, 496, 8128};

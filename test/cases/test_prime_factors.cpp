@@ -12,14 +12,14 @@ TEST(PrimeFactorsTest, Assertions) {
                                                  13, 17, 19, 23, 29};
   ASSERT_EQ(prime_factors, expected_factors);
 }
-TEST(PrimeFactorsTestZeroEdgeCase, Assertions) {
+TEST(PrimeFactorsTest, EdgeCases) {
   unsigned long of = 0;
   std::vector<unsigned long> prime_factors = get_prime_factors(of);
   std::vector<unsigned long> expected_factors = {};
   ASSERT_EQ(prime_factors, expected_factors);
 }
 
-TEST(PrimeFactorsTestLowValueEdgeCase, Assertions) {
+TEST(PrimeFactorsTest, SeveralLowValueEdgeCase) {
   std::vector<int> prime_factors[7];
 
   for (int i = 2; i <= 8; i++) {
