@@ -157,7 +157,7 @@ void print_mersenne_nums_in_interval(const T &begin, const T &end) {
 // -----------------------------------------------------------------------------
 
 template <typename T, typename>
-std::vector<T> get_first_n_amount_of_mersenne_nums(T n) {
+std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> res;
   if (n < 2)
     return res;
@@ -172,7 +172,7 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(T n) {
 }
 
 template <typename T, typename>
-void print_first_n_amount_of_mersenne_nums(T n) {
+void print_first_n_amount_of_mersenne_nums(const T &n) {
   std::cout << "{ " << 2 << " ";
   std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
 
@@ -190,7 +190,7 @@ void print_first_n_amount_of_mersenne_nums(T n) {
 // -----------------------------------------------------------------------------
 
 template <typename T, typename>
-std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n) {
+std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res;
 
   if (n < 2)
@@ -209,7 +209,7 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n) {
 }
 
 template <typename T, typename>
-void print_first_n_amount_of_mersenne_prime_nums(T n) {
+void print_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
 
   std::cout << "{ ";
@@ -245,7 +245,7 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
 // Task 10
 // -----------------------------------------------------------------------------
 
-template <typename T, typename> bool is_perfect(T n) {
+template <typename T, typename> bool is_perfect(const T &n) {
   // Credit: https://www.geeksforgeeks.org/perfect-number/
 
   if (n <= 5)

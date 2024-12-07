@@ -131,14 +131,14 @@ void print_mersenne_nums_in_interval(const T &begin = 2, const T &end = 2);
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-std::vector<T> get_first_n_amount_of_mersenne_nums(T n);
+std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n);
 
 /**
  * Prints the first `n` amount of mersenne numbers.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-void print_first_n_amount_of_mersenne_nums(T n);
+void print_first_n_amount_of_mersenne_nums(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 8
@@ -149,14 +149,14 @@ void print_first_n_amount_of_mersenne_nums(T n);
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-std::vector<T> get_first_n_amount_of_mersenne_prime_nums(T n);
+std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n);
 
 /**
  * Prints the first `n` amount of mersenne prime numbers.
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-void print_first_n_amount_of_mersenne_prime_nums(T n);
+void print_first_n_amount_of_mersenne_prime_nums(const T &n);
 
 // -----------------------------------------------------------------------------
 // Task 9
@@ -182,7 +182,7 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin = 2,
  */
 template <typename T, typename = typename std::enable_if<
                           std::is_arithmetic<T>::value, T>::type>
-bool is_perfect(T n);
+bool is_perfect(const T &n);
 
 /**
  * Gets all the perfect numbers from `begin` to `end`.
