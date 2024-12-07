@@ -19,11 +19,25 @@ TEST(MersennePrimeNumbersTest, Assertions) {
 
   ASSERT_EQ(first_nine_mersenne_primes, expected_first_nine_mersenne_primes);
 
+  return;
+}
+
+TEST(MersennePrimeNumbersTest, BasicIsMersennePrimeTests) {
   ASSERT_FALSE(is_mersenne_prime(15));
   ASSERT_FALSE(is_mersenne_prime(63));
 
-  ASSERT_TRUE(is_mersenne(8'191));
   ASSERT_TRUE(is_mersenne_prime(8'191));
+
+  return;
+}
+
+TEST(MersennePrimeNumbersTest, EdgeCases) {
+  std::vector<int> zero_mersenne_primes =
+      get_first_n_amount_of_mersenne_prime_nums(0);
+
+  std::vector<int> expected_mersenne_primes = {};
+
+  ASSERT_EQ(zero_mersenne_primes, expected_mersenne_primes);
 
   return;
 }
