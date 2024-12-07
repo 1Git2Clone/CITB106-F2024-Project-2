@@ -20,8 +20,9 @@ add_executable(
 
 target_link_libraries(
   all_tests
-  GTest::GTest
-  GTest::Main
+  PRIVATE
+  GTest::gtest
+  GTest::gtest_main
 )
 
 enable_testing()

@@ -26,7 +26,5 @@ endif()
 FetchContent_MakeAvailable(gtest)
 # ---
 
-find_package(GTest REQUIRED)
-
 enable_testing()
 add_subdirectory(test test)
