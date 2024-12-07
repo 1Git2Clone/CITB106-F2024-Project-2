@@ -1,5 +1,5 @@
 #include "./test_difference.h"
-#include "../../src/utils/math.cpp"
+#include "../../src/utils/set_math.cpp"
 #include <gtest/gtest.h>
 
 TEST(DifferenceTest, AssertionsSetSet) {

@@ -1,4 +1,5 @@
-#include "./utils/math.cpp"
+#include "./utils/divisors.cpp"
+#include "./utils/mersenne.cpp"
 
 int main(int argc, char *argv[]) {
   print_first_n_amount_of_mersenne_prime_nums<unsigned long long>(5);

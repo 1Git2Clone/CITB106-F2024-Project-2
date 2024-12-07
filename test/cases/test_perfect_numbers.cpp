@@ -1,6 +1,6 @@
 #include "./test_perfect_numbers.h"
 
-#include "../../src/utils/math.cpp"
+#include "../../src/utils/perfect_nums.cpp"
 
 #include <climits>
 #include <gtest/gtest.h>
