@@ -298,11 +298,16 @@ template <typename T> bool is_perfect(const T &n) {
 template <typename T>
 std::vector<T>
 get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
-
   std::vector<T> res;
+  T end = *std::ranges::prev(range.end());
+
+  if (end < 6)
+    return res;
+
   std::function<bool(const T)> is_perfect_n = [](const T &n) {
     return is_perfect(n);
   };
+
   // clang-format off
   for (const T &i
        : range
@@ -318,6 +323,9 @@ get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
 
 template <typename T>
 std::vector<T> get_perfect_nums_in_interval(const T &begin, const T &end) {
+  if (begin > end || end < 6)
+    return std::vector<T>{};
+
   std::ranges::iota_view<T, T> range =
       std::ranges::views::iota(begin, (T)(end));
   return get_perfect_nums_in_range(range);
