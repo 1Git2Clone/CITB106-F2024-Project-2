@@ -1,3 +1,4 @@
+#include "../src/utils/helper_functions.cpp"
 #include "../src/utils/math.cpp"
 #include <cassert>
 #include <set>

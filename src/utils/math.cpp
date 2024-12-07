@@ -1,11 +1,6 @@
 #include "math.h"
-#include "helper_functions.cpp"
 
 #include <algorithm>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <immintrin.h>
 #include <iostream>
 #include <set>
 #include <vector>
