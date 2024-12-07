@@ -3,9 +3,6 @@ file(GLOB TEST_SRCS
   "cases/*.h"
 )
 
-# Remove main.cpp from the list
-list(REMOVE_ITEM TEST_SRCS "${PROJECT_SOURCE_DIR}/test/main.cpp")
-
 # include
 include_directories(
   ${PROJECT_SOURCE_DIR}/src
