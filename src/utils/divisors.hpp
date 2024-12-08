@@ -55,7 +55,7 @@ template <Integer T> std::vector<T> print_divisors(const T &n) {
 
   std::cout << "{ ";
   std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
-  std::cout << " }" << std::endl;
+  std::cout << "}" << std::endl;
 
   return nums;
 }
