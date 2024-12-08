@@ -2,6 +2,7 @@
 #define UTILS_DIVISORS_HPP
 
 #include "./concepts.hpp"
+#include "mersenne.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -19,7 +20,10 @@
  */
 template <Integer T> std::vector<T> get_divisors(const T &n) {
   std::vector<T> res;
-  if (n <= 1)
+  // Checking it its mersenne first will evaluate as false, this also does prime
+  // checking afterwards (since prime numbers are only divisible by 1 and
+  // themselves).
+  if (n <= 1 || is_mersenne_prime(n))
     return res;
 
   std::function<bool(const T)> div_by_i = [n](const T &i) {
@@ -33,7 +37,7 @@ template <Integer T> std::vector<T> get_divisors(const T &n) {
   //
   // [1]: https://stackoverflow.com/questions/70942638/tweaking-clang-format-for-c20-ranges-pipelines/75283554#75283554
   // [2]: https://en.cppreference.com/w/cpp/ranges/filter_view#Example
-  for (const T &i : std::ranges::views::iota((T)2, (T)n)
+  for (const T &i : std::ranges::views::iota(static_cast<T>(2), static_cast<T>(n))
                   | std::ranges::views::filter(div_by_i)) {
     res.push_back(i);
   }
