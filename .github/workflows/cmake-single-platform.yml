@@ -27,5 +27,5 @@ jobs:
         run: ./test/all_tests
 
       - name: Main
-        working-directory: ${{github.workspace}}/build
-        run: ./main << ../input/mock_input.txt
+        working-directory: ${{github.workspace}}
+        run: ./build/main << ./input/mock_input.txt
