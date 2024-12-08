@@ -37,6 +37,8 @@ endif()
 
 FetchContent_MakeAvailable(gtest)
 
+find_library(GTest gtest)
+
 message(STATUS "GoogleTest source directory: ${googletest_SOURCE_DIR}")
 message(STATUS "GoogleTest binary directory: ${googletest_BINARY_DIR}")
 
