@@ -1,3 +1,5 @@
+enable_testing()
+
 file(GLOB TEST_SRCS
   "cases/*.cpp"
   "cases/*.h"
@@ -17,9 +19,9 @@ add_executable(
 
 target_link_libraries(
   all_tests
-  gtest
-  gtest_main
+  GTest::gtest_main
 )
 
-enable_testing()
+include(GoogleTest)
 add_test(NAME all_tests COMMAND ${CMAKE_BINARY_DIR}/test/all_tests)
+gtest_discover_tests(all_tests)
