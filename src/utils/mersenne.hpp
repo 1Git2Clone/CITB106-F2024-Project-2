@@ -67,7 +67,7 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
     return res;
 
   T counter = 0;
-  for (unsigned long long i = 0b11; counter < n; i = (i << 1) + 1, counter++) {
+  for (T i = 0b11; counter < n; i = (i << 1) + 1, counter++) {
     res.push_back(i);
   }
 

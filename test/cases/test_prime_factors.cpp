@@ -6,10 +6,10 @@
 #include <vector>
 
 TEST(PrimeFactorsTest, Assertions) {
-  unsigned long of = 6469693230;
-  std::vector<unsigned long> prime_factors = get_prime_factors(of);
-  std::vector<unsigned long> expected_factors = {2,  3,  5,  7,  11,
-                                                 13, 17, 19, 23, 29};
+  unsigned long long of = static_cast<unsigned long long>(6469693230);
+  std::vector<unsigned long long> prime_factors = get_prime_factors(of);
+  std::vector<unsigned long long> expected_factors = {2,  3,  5,  7,  11,
+                                                      13, 17, 19, 23, 29};
   ASSERT_EQ(prime_factors, expected_factors);
 }
 

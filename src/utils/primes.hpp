@@ -62,7 +62,7 @@ template <Integer T> std::vector<T> get_prime_factors(const T &n) {
     return primes;
   }
 
-  T n_sqrt = sqrt(n);
+  T n_sqrt = static_cast<T>(std::sqrt(n));
   std::vector<bool> is_prime(n_sqrt + 2, true);
 
   for (const T &i : std::ranges::views::iota((T)2, (T)(n_sqrt + 1))) {
