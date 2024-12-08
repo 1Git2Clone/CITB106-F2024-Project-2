@@ -41,9 +41,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${googletest_SOURCE_DIR}/googletest/include)
 include_directories(${googletest_SOURCE_DIR}/googlemock/include)
 
-set(GTEST_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/_deps/gtest-src/googletest/include)
-set(GTEST_LIBRARIES ${CMAKE_BINARY_DIR}/_deps/gtest-build/lib/libgtest.a)
-
 message(STATUS "GoogleTest source directory: ${googletest_SOURCE_DIR}")
 message(STATUS "GoogleTest binary directory: ${googletest_BINARY_DIR}")
 
