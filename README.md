@@ -11,25 +11,48 @@ University project mainly involving [Mersenne numbers](https://en.wikipedia.org/
 
 ## Setting up
 
-The project requires [`cmake`](https://cmake.org/) to setup conventionally
-(_but you can also just use plain `clang++` or `g++` to get it working_).
+### Initial
 
-### Via CMake
+> [!NOTE]
+> This step needs to be done with every code change.
 
 ```sh
 cmake -B build
 cmake --build build
+```
+
+### Running main
+
+```sh
+./build/main
+```
+
+Alternatively, if you want to pipe user input you can do it like so:
+
+#### On Linux/Mac OS
+
+```sh
+./build/main < ./input/mock_input.txt
+```
+
+#### On Windows
+
+##### PowerShell
+
+```powershell
+Get-Content ./input/mock_input.txt | ./build/main
+```
+
+##### CMD
+
+```cmd
+.\build\main < .\input\mock_input.txt
+```
+
+### Running tests
+
+```sh
 ./build/test/all_tests
 ctest  # This is an alternative but since this project uses gtest, the display
        # of the tests will be worse.
-```
-
-### Manually
-
-If you want to manually make your executables then you can just use a compiler
-like `clang++` or `g++` (substituting for `<compiler>`) like so:
-
-```sh
-<compiler> ./src/main.cpp -O3 -Wall  # for the main executable.
-<compiler> ./test/main.cpp -O3 -Wall  # for the test executable.
 ```
