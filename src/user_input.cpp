@@ -55,7 +55,7 @@ void UserInput::mersennes_in_interval() {
 }
 
 void UserInput::prime_factors() {
-  long prime_factors_n = get_integer_input_line<long>(
+  long long prime_factors_n = get_integer_input_line<long long>(
       "Enter a long int to get its prime factors from: ");
   std::cout << "Prime factors of " << prime_factors_n << ": ";
   print_prime_factors(prime_factors_n);
