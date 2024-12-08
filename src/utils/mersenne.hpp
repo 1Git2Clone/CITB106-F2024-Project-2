@@ -37,7 +37,7 @@ template <Integer T> bool is_mersenne(const T &n) {
  * [1]: https://en.wikipedia.org/wiki/Mersenne_prime
  */
 template <Integer T> bool is_mersenne_prime(const T &n) {
-  return is_prime(n) && is_mersenne(n);
+  return is_mersenne(n) && is_prime(n);
 }
 
 // -----------------------------------------------------------------------------
@@ -98,9 +98,6 @@ std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
 template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res;
-
-  if (n < 2)
-    return res;
 
   T counter = 0;
 
