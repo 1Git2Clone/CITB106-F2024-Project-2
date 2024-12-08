@@ -20,8 +20,9 @@ add_executable(
 target_link_libraries(
   all_tests
   PRIVATE
-  gtest
-  gtest_main
+  GTest::gtest
+  GTest::gtest_main
+  GTest::gmock
 )
 
 include(GoogleTest)
