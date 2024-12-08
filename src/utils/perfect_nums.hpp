@@ -20,9 +20,9 @@ template <Integer T> bool is_perfect(const T &n) {
   if (n <= 5)
     return false;
 
-  unsigned long long sum = 1;
+  T sum = 1;
 
-  for (unsigned long long i = 2; i * i < n; i++) {
+  for (T i = 2; i * i < n; i++) {
     if (n % i == 0) {
       ((i * i) != n) ? (sum += i + (n / i)) : (sum += i);
     }
