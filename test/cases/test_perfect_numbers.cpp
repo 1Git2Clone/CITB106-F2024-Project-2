@@ -43,6 +43,14 @@ TEST(PerfectNumbersTest, AssertionsWithRanges) {
   return;
 }
 
+// On MSVC invalid ranges like these are hard errrors.
+// ```
+//  C:\Program Files\Microsoft Visual
+//  Studio\2022\Enterprise\VC\Tools\MSVC\14.42.34433\include\ranges(982) :
+//  Assertion failed: Per N4981 [range.iota.view]/8, the first argument must
+//  not exceed the second when their types are totally ordered.
+// ```
+#ifndef _WIN32
 TEST(PerfectNumbersTest, EdgeCasesWithRanges) {
   std::ranges::iota_view<long long, long long> range =
       std::ranges::views::iota(LLONG_MAX, 0ll);
@@ -53,3 +61,4 @@ TEST(PerfectNumbersTest, EdgeCasesWithRanges) {
 
   return;
 }
+#endif
