@@ -26,7 +26,7 @@ add_executable(
 include(FetchContent)
 
 FetchContent_Declare(
-  gtest
+  googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
   GIT_TAG release-1.12.1
 )
@@ -35,10 +35,9 @@ if(MSVC)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 endif()
 
-FetchContent_MakeAvailable(gtest)
+FetchContent_MakeAvailable(googletest)
 
-message(STATUS "GoogleTest source directory: ${googletest_SOURCE_DIR}")
-message(STATUS "GoogleTest binary directory: ${googletest_BINARY_DIR}")
+find_library(GTest gtest)
 
 # ---
 
