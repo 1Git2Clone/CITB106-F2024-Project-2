@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
 add_compile_options(-std=c++20)
-add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+if(MSVC)
+  add_compile_options(/W3 /WX)
+else()
+  add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+endif()
 
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
 
@@ -27,7 +31,7 @@ FetchContent_Declare(
   GIT_TAG release-1.12.1
 )
 
-if(WIN32)
+if(MSVC)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 endif()
 
