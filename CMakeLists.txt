@@ -6,7 +6,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
 add_compile_options(-std=c++20)
 
-add_executable(main src/main.cpp)
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
+
+add_executable(
+  main
+  ${SOURCES}
+)
 
 # ---
 # Gtest integration based on:
