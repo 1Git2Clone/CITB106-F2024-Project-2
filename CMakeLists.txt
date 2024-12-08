@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
 add_compile_options(-std=c++20)
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
 
