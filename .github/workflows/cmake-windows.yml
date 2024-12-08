@@ -27,4 +27,4 @@ jobs:
 
       - name: Main
         working-directory: ${{github.workspace}}
-        run: Get-Content .\input\mock_input.txt | .\build\main.exe
+        run: Get-Content .\input\mock_input.txt | & .\build\Debug\main.exe
