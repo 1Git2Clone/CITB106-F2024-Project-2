@@ -20,8 +20,8 @@ jobs:
         run: cmake --build ${{github.workspace}}\build
 
       - name: Test
-        working-directory: ${{github.workspace}}\build
-        run: .\test\all_tests
+        working-directory: ${{github.workspace}}\build\test
+        run: .\Debug\all_tests.exe
 
       - name: Main
         working-directory: ${{github.workspace}}

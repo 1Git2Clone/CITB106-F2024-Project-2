@@ -37,10 +37,6 @@ endif()
 
 FetchContent_MakeAvailable(gtest)
 
-include_directories(${GTEST_INCLUDE_DIRS})
-include_directories(${googletest_SOURCE_DIR}/googletest/include)
-include_directories(${googletest_SOURCE_DIR}/googlemock/include)
-
 message(STATUS "GoogleTest source directory: ${googletest_SOURCE_DIR}")
 message(STATUS "GoogleTest binary directory: ${googletest_BINARY_DIR}")
 
