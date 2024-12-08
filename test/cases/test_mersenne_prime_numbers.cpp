@@ -1,5 +1,5 @@
-#include "./test_mersenne_prime_numbers.h"
-#include "../../src/utils/mersenne.cpp"
+#include "./test_mersenne_prime_numbers.hpp"
+#include "../../src/utils/mersenne.hpp"
 #include <gtest/gtest.h>
 
 TEST(MersennePrimeNumbersTest, Assertions) {

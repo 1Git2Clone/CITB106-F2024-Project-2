@@ -1,6 +1,7 @@
-#ifndef UTILS_PRIMES_CPP
-#define UTILS_PRIMES_CPP
+#ifndef UTILS_PRIMES_HPP
+#define UTILS_PRIMES_HPP
 
+#include "concepts.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -12,9 +13,12 @@
 // -----------------------------------------------------------------------------
 
 /**
- * Implementation is done via the trial division method in order to save space.
+ * Checks if a number is a prime number[1] using the trial division method[2].
+ *
+ * [1]: https://en.wikipedia.org/wiki/Prime_number
+ * [2]: https://en.wikipedia.org/wiki/Prime_number#Trial_division
  */
-template <typename T> bool is_prime(const T &n) {
+template <Integer T> bool is_prime(const T &n) {
   if (n <= 1)
     return false;
   if (n <= 3)
@@ -34,7 +38,14 @@ template <typename T> bool is_prime(const T &n) {
 // Task 4
 // -----------------------------------------------------------------------------
 
-template <typename T> std::vector<T> get_prime_factors(const T &n) {
+/**
+ * Implemented in O(sqrt(n)) space via the segmented sieve of eratosthenes
+ * algorithm[1].
+ *
+ * [1]:
+ * https://cp-algorithms.com/algebra/sieve-of-eratosthenes.hpptml#segmented-sieve
+ */
+template <Integer T> std::vector<T> get_prime_factors(const T &n) {
   if (n <= 1)
     return std::vector<T>();
   if (is_prime(n))
@@ -68,7 +79,11 @@ template <typename T> std::vector<T> get_prime_factors(const T &n) {
   return primes;
 }
 
-template <typename T> std::vector<T> print_prime_factors(const T &n) {
+/**
+ * Gets all the prime fractors from the `get_prime_factors` function and prints
+ * them to `stdout`.
+ */
+template <Integer T> std::vector<T> print_prime_factors(const T &n) {
   std::vector<T> nums = get_prime_factors(n);
 
   std::cout << "{ ";
@@ -78,4 +93,4 @@ template <typename T> std::vector<T> print_prime_factors(const T &n) {
   return nums;
 }
 
-#endif // !UTILS_PRIMES_CPP
+#endif // !UTILS_PRIMES_HPP

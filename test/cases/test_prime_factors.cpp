@@ -1,6 +1,6 @@
-#include "./test_prime_factors.h"
+#include "./test_prime_factors.hpp"
 
-#include "../../src/utils/primes.cpp"
+#include "../../src/utils/primes.hpp"
 
 #include <gtest/gtest.h>
 #include <vector>

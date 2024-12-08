@@ -1,6 +1,6 @@
-#include "./test_divisors.h"
-#include "../../src/utils/divisors.cpp"
-#include "../../src/utils/primes.cpp"
+#include "./test_divisors.hpp"
+#include "../../src/utils/divisors.hpp"
+#include "../../src/utils/primes.hpp"
 #include <climits>
 #include <gtest/gtest.h>
 

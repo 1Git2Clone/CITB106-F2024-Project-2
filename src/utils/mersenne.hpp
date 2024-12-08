@@ -1,7 +1,7 @@
-#ifndef UTILS_MERSENNE_CPP
-#define UTILS_MERSENNE_CPP
+#ifndef UTILS_MERSENNE_HPP
+#define UTILS_MERSENNE_HPP
 
-#include "./primes.cpp"
+#include "./primes.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -12,7 +12,15 @@
 // Task 1
 // -----------------------------------------------------------------------------
 
-template <typename T> bool is_mersenne(const T &n) {
+/**
+ * Check if a number is a mersenne number.
+ * The mersenne form is M(n) = 2^n - 1.[1]
+ *
+ * NOTE: without necessarily checking for primeness.
+ *
+ * [1]: https://en.wikipedia.org/wiki/Mersenne_prime
+ */
+template <Integer T> bool is_mersenne(const T &n) {
   return n >= 0 && ((n + 1) & n) == 0;
 }
 
@@ -20,7 +28,15 @@ template <typename T> bool is_mersenne(const T &n) {
 // Task 2
 // -----------------------------------------------------------------------------
 
-template <typename T> bool is_mersenne_prime(const T &n) {
+/**
+ * Checks if a number is a mersenne prime[1].
+ *
+ * Under the hood this is just a wrapper that returns `is_prime()` &&
+ * `is_mersenne()`.
+ *
+ * [1]: https://en.wikipedia.org/wiki/Mersenne_prime
+ */
+template <Integer T> bool is_mersenne_prime(const T &n) {
   return is_prime(n) && is_mersenne(n);
 }
 
@@ -30,14 +46,21 @@ template <typename T> bool is_mersenne_prime(const T &n) {
 
 // NOTE: Implementation is done in a different place due to depending on a
 // different function.
-template <typename T>
+
+/**
+ * Prints all the non-prime mersene numbers from `begin` to `end`.
+ */
+template <Integer T>
 std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end);
 
 // -----------------------------------------------------------------------------
 // Task 7
 // -----------------------------------------------------------------------------
 
-template <typename T>
+/**
+ * Getsthe first `n` amount of mersenne numbers.
+ */
+template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> res;
   if (n < 2)
@@ -51,7 +74,10 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   return res;
 }
 
-template <typename T>
+/**
+ * Prints the first `n` amount of mersenne numbers.
+ */
+template <Integer T>
 std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
 
@@ -66,7 +92,10 @@ std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
 // Task 8
 // -----------------------------------------------------------------------------
 
-template <typename T>
+/**
+ * Gets the first `n` amount of mersenne prime numbers.
+ */
+template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res;
 
@@ -75,7 +104,7 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
 
   T counter = 0;
 
-  for (unsigned long long i = 0b11; counter != n; i = (i << 1) + 1) {
+  for (T i = 0b11; counter != n; i = (i << 1) + 1) {
     if (is_prime(i)) {
       res.push_back(i);
       counter++;
@@ -85,7 +114,10 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   return res;
 }
 
-template <typename T>
+/**
+ * Prints the first `n` amount of mersenne prime numbers.
+ */
+template <Integer T>
 std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
 
@@ -100,7 +132,10 @@ std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n) {
 // Task 9
 // -----------------------------------------------------------------------------
 
-template <typename T>
+/**
+ * Prints all the non-prime mersene numbers from `begin` to `end`.
+ */
+template <Integer T>
 std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> res;
 
@@ -116,7 +151,10 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   return res;
 }
 
-template <typename T>
+/**
+ * Gets all the non-prime mersene numbers from `begin` to `end`.
+ */
+template <Integer T>
 std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
 
@@ -127,4 +165,4 @@ std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
   return nums;
 }
 
-#endif // !UTILS_MERSENNE_CPP
+#endif // !UTILS_MERSENNE_HPP

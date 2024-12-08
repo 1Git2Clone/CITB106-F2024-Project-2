@@ -1,18 +1,23 @@
-#ifndef UTILS_DIVISORS_CPP
-#define UTILS_DIVISORS_CPP
+#ifndef UTILS_DIVISORS_HPP
+#define UTILS_DIVISORS_HPP
+
+#include "./concepts.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <functional>
 #include <iostream>
 #include <ranges>
-#include <vector>
 
 // -----------------------------------------------------------------------------
 // Task 3
 // -----------------------------------------------------------------------------
 
-template <typename T> std::vector<T> get_divisors(const T &n) {
+/**
+ * Gets all the divisors of a number `n` that are greater than `1` and less
+ * than `n`.
+ */
+template <Integer T> std::vector<T> get_divisors(const T &n) {
   std::vector<T> res;
   if (n <= 1)
     return res;
@@ -37,7 +42,11 @@ template <typename T> std::vector<T> get_divisors(const T &n) {
   return res;
 }
 
-template <typename T> std::vector<T> print_divisors(const T &n) {
+/**
+ * Prints all the divisors of a number `n` that are greater than `1` and less
+ * than `n`.
+ */
+template <Integer T> std::vector<T> print_divisors(const T &n) {
   std::vector<T> nums = get_divisors(n);
 
   std::cout << "{ ";
@@ -47,4 +56,4 @@ template <typename T> std::vector<T> print_divisors(const T &n) {
   return nums;
 }
 
-#endif // !UTILS_DIVISORS_CPP
+#endif // !UTILS_DIVISORS_HPP

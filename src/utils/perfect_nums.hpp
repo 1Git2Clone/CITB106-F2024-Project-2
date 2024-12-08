@@ -1,5 +1,6 @@
-#ifndef UTILS_PERFECT_NUMS_CPP
-#define UTILS_PERFECT_NUMS_CPP
+#ifndef UTILS_PERFECT_NUMS_HPP
+#define UTILS_PERFECT_NUMS_HPP
+#include "./concepts.hpp"
 
 #include <cmath>
 #include <functional>
@@ -10,7 +11,10 @@
 // Task 10
 // -----------------------------------------------------------------------------
 
-template <typename T> bool is_perfect(const T &n) {
+/**
+ * Checks if a number is a perfect number.
+ */
+template <Integer T> bool is_perfect(const T &n) {
   // Credit: https://www.geeksforgeeks.org/perfect-number/
 
   if (n <= 5)
@@ -27,7 +31,10 @@ template <typename T> bool is_perfect(const T &n) {
   return sum == n;
 }
 
-template <typename T>
+/**
+ * Gets all the perfect numbers from an `std::ranges::iota_view`.
+ */
+template <Integer T>
 std::vector<T>
 get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
   std::vector<T> res;
@@ -52,7 +59,10 @@ get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
   return res;
 }
 
-template <typename T>
+/**
+ * Gets all the perfect numbers from `begin` to `end`.
+ */
+template <Integer T>
 std::vector<T> get_perfect_nums_in_interval(const T &begin, const T &end) {
   if (begin > end || end < 6)
     return std::vector<T>{};
@@ -62,4 +72,4 @@ std::vector<T> get_perfect_nums_in_interval(const T &begin, const T &end) {
   return get_perfect_nums_in_range(range);
 }
 
-#endif // !UTILS_PERFECT_NUMS_CPP
+#endif // !UTILS_PERFECT_NUMS_HPP

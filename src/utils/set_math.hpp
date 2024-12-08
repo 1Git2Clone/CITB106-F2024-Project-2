@@ -1,5 +1,7 @@
-#ifndef UTILS_SET_MATH_CPP
-#define UTILS_SET_MATH_CPP
+#ifndef UTILS_SET_MATH_HPP
+#define UTILS_SET_MATH_HPP
+
+#include "./concepts.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -12,7 +14,11 @@
 // Task 5
 // -----------------------------------------------------------------------------
 
-template <typename T>
+/**
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
+ */
+template <Integer T>
 std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b) {
   std::set<T> res;
 
@@ -26,7 +32,11 @@ std::set<T> set_difference(const std::set<T> &a, const std::set<T> &b) {
   return res;
 }
 
-template <typename T>
+/**
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
+ */
+template <Integer T>
 std::vector<T> vec_difference(const std::set<T> &a, const std::set<T> &b) {
   std::vector<T> res(a.size());
   typename std::vector<T>::iterator it;
@@ -38,7 +48,11 @@ std::vector<T> vec_difference(const std::set<T> &a, const std::set<T> &b) {
   return res;
 }
 
-template <typename T>
+/**
+ * Equivalent of doing `A \ B` in set theory returning all the members of `A`
+ * which don't exist in `B`.
+ */
+template <Integer T>
 std::vector<T> vec_difference(const std::vector<T> &a,
                               const std::vector<T> &b) {
   std::vector<T> res(a.size());
@@ -51,4 +65,4 @@ std::vector<T> vec_difference(const std::vector<T> &a,
   return res;
 }
 
-#endif // !UTILS_SET_MATH_CPP
+#endif // !UTILS_SET_MATH_HPP

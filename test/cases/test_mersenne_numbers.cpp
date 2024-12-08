@@ -1,5 +1,5 @@
-#include "./test_mersenne_numbers.h"
-#include "../../src/utils/mersenne.cpp"
+#include "./test_mersenne_numbers.hpp"
+#include "../../src/utils/mersenne.hpp"
 #include <gtest/gtest.h>
 
 TEST(MersenneNumbersTest, Interval) {
