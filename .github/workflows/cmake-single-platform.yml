@@ -28,4 +28,4 @@ jobs:
 
       - name: Main
         working-directory: ${{github.workspace}}
-        run: ./build/main << ./input/mock_input.txt
+        run: cat ./input/mock_input.txt | ./build/main
