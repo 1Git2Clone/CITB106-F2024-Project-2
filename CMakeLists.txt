@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.14)
 project(CITB106-F2024-Project-2)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED NO)
 set(CMAKE_CXX_EXTENSIONS NO)
 if(MSVC)
   add_compile_options(/W3 /WX)
 else()
-  add_compile_options(-std=c++20)
+  add_compile_options(-std=c++23)
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
 
