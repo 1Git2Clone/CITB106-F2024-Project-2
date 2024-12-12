@@ -3,6 +3,7 @@
 #include "./concepts.hpp"
 
 #include <cmath>
+#include <functional>
 #include <ranges>
 #include <vector>
 
@@ -36,17 +37,26 @@ template <Integer T> bool is_perfect(const T &n) {
 template <Integer T>
 std::vector<T>
 get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
+  std::vector<T> res;
   T end = *std::ranges::prev(range.end());
+
   if (end < 6)
-    return std::vector<T>{};
+    return res;
 
-  T begin = *std::ranges::prev(range.begin());
-  if (end < begin)
-    return std::vector<T>{};
+  std::function<bool(const T)> is_perfect_n = [](const T &n) {
+    return is_perfect(n);
+  };
 
-  return std::ranges::to<std::vector<T>>(
-      range |
-      std::ranges::views::filter([](const T &n) { return is_perfect(n); }));
+  // clang-format off
+  for (const T &i : range
+                  | std::ranges::views::filter(is_perfect_n)) {
+    res.push_back(i);
+  }
+  // clang-format on
+
+  return res;
+
+  return res;
 }
 
 /**
@@ -54,7 +64,12 @@ get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
  */
 template <Integer T>
 std::vector<T> get_perfect_nums_in_interval(const T &begin, const T &end) {
-  return get_perfect_nums_in_range(std::ranges::views::iota(begin, end));
+  if (begin > end || end < 6)
+    return std::vector<T>{};
+
+  std::ranges::iota_view<T, T> range =
+      std::ranges::views::iota(begin, (T)(end));
+  return get_perfect_nums_in_range(range);
 }
 
 #endif // !UTILS_PERFECT_NUMS_HPP
