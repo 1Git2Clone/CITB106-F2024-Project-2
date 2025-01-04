@@ -2,7 +2,7 @@
 
 [![Build Icon]][Build Status]&emsp;[![License Icon]][LICENSE]
 
-[Build Icon]: https://img.shields.io/github/actions/workflow/status/1git2clone/CITB106-F2024-Project-2/actions
+[Build Icon]: https://img.shields.io/github/actions/workflow/status/1Git2Clone/CITB106-F2024-Project-2/cmake-linux.yml?branch=main
 [Build Status]: https://github.com/1git2clone/CITB106-F2024-Project-2/actions?query=branch%3Amain
 [License Icon]: https://img.shields.io/badge/license-MIT-blue.svg
 [LICENSE]: LICENSE
