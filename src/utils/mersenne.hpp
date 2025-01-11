@@ -59,18 +59,36 @@ void print_mersenne_nums_in_interval(const T &begin, const T &end);
 // -----------------------------------------------------------------------------
 
 /**
+ * Applies a callback function `f` to the first `n` amount of mersenne numbers.
+ */
+template <Integer T>
+void operate_on_first_n_amount_of_mersenne_nums(
+    const T &n, std::function<void(const T &)> f) {
+  if (n < 2)
+    return;
+
+  T counter = 0;
+
+  for (T i = 0b11; counter != n; i = (i << 1) + 1, counter++) {
+    f(i);
+  }
+
+  return;
+}
+
+/**
  * Getsthe first `n` amount of mersenne numbers.
  */
 template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   std::vector<T> res;
+
   if (n < 2)
     return res;
 
-  T counter = 0;
-  for (T i = 0b11; counter < n; i = (i << 1) + 1, counter++) {
-    res.push_back(i);
-  }
+  operate_on_first_n_amount_of_mersenne_nums(
+      n, std::function<void(const T &)>(
+             [&res](const T &num) { res.push_back(num); }));
 
   return res;
 }
@@ -78,15 +96,14 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
 /**
  * Prints the first `n` amount of mersenne numbers.
  */
-template <Integer T>
-std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
-  std::vector<T> nums = get_first_n_amount_of_mersenne_nums(n);
-
+template <Integer T> void print_first_n_amount_of_mersenne_nums(const T &n) {
   std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  operate_on_first_n_amount_of_mersenne_nums(
+      n, std::function<void(const T &)>(
+             [](const T &num) { std::cout << num << " "; }));
   std::cout << "}" << std::endl;
 
-  return nums;
+  return;
 }
 
 // -----------------------------------------------------------------------------
