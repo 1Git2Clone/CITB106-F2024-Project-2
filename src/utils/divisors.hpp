@@ -4,7 +4,6 @@
 #include "./concepts.hpp"
 #include "mersenne.hpp"
 
-#include <algorithm>
 #include <cmath>
 #include <functional>
 #include <iostream>
@@ -15,16 +14,14 @@
 // -----------------------------------------------------------------------------
 
 /**
- * Gets all the divisors of a number `n` that are greater than `1` and less
- * than `n`.
+ * Applies a callback function `f` to all the divisors of a number `n` that are
+ * greater than `1` and less than `n`.
  */
-template <Integer T> std::vector<T> get_divisors(const T &n) {
-  std::vector<T> res;
-  // Checking it its mersenne first will evaluate as false, this also does prime
-  // checking afterwards (since prime numbers are only divisible by 1 and
-  // themselves).
+template <Integer T>
+void operate_on_divisors(const T &n, std::function<void(const T &)> f) {
+
   if (n <= 1 || is_mersenne_prime(n))
-    return res;
+    return;
 
   std::function<bool(const T)> div_by_i = [n](const T &i) {
     return n % i == 0;
@@ -39,9 +36,20 @@ template <Integer T> std::vector<T> get_divisors(const T &n) {
   // [2]: https://en.cppreference.com/w/cpp/ranges/filter_view#Example
   for (const T &i : std::ranges::views::iota(static_cast<T>(2), static_cast<T>(n))
                   | std::ranges::views::filter(div_by_i)) {
-    res.push_back(i);
+    f(i);
   }
-  // clang-format on
+}
+
+/**
+ * Gets all the divisors of a number `n` that are greater than `1` and less
+ * than `n`.
+ */
+template <Integer T> std::vector<T> get_divisors(const T &n) {
+  std::vector<T> res;
+
+  operate_on_divisors(n, std::function<void (const T &)>([&res](const T&divisor){
+    res.push_back(divisor);
+  }));
 
   return res;
 }
@@ -50,14 +58,14 @@ template <Integer T> std::vector<T> get_divisors(const T &n) {
  * Prints all the divisors of a number `n` that are greater than `1` and less
  * than `n`.
  */
-template <Integer T> std::vector<T> print_divisors(const T &n) {
-  std::vector<T> nums = get_divisors(n);
-
+template <Integer T> void print_divisors(const T &n) {
   std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  operate_on_divisors(n, std::function<void (const T &)>([](const T&divisor){
+    std::cout << divisor << " ";
+  }));
   std::cout << "}" << std::endl;
 
-  return nums;
+  return;
 }
 
 #endif // !UTILS_DIVISORS_HPP
