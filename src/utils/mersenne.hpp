@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <functional>
 #include <iostream>
 #include <vector>
 
@@ -51,7 +52,7 @@ template <Integer T> bool is_mersenne_prime(const T &n) {
  * Prints all the non-prime mersene numbers from `begin` to `end`.
  */
 template <Integer T>
-std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end);
+void print_mersenne_nums_in_interval(const T &begin, const T &end);
 
 // -----------------------------------------------------------------------------
 // Task 7
@@ -130,20 +131,35 @@ std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n) {
 // -----------------------------------------------------------------------------
 
 /**
+ * Applies a function `f` on all the non-prime mersene numbers from `begin` to
+ * `end`.
+ */
+template <Integer T>
+void operate_on_mersenne_nums_in_interval(const T &begin, const T &end,
+                                          std::function<void(const T &)> f) {
+  if (end < begin)
+    return;
+
+  for (T i = 0b11; i < end; i = (i << 1) + 1) {
+    if (i < begin)
+      continue;
+    f(i);
+  }
+
+  return;
+}
+
+/**
  * Prints all the non-prime mersene numbers from `begin` to `end`.
  */
 template <Integer T>
 std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::vector<T> res;
 
-  if (end < begin)
-    return res;
-
-  for (T i = 0b11; i < end; i = (i << 1) + 1) {
-    if (i < begin)
-      continue;
-    res.push_back(i);
-  }
+  operate_on_mersenne_nums_in_interval(
+      begin, end, std::function<void(const T &)>([&res](const T &n) -> void {
+        res.push_back(n);
+      }));
 
   return res;
 }
@@ -152,14 +168,15 @@ std::vector<T> get_mersenne_nums_in_interval(const T &begin, const T &end) {
  * Gets all the non-prime mersene numbers from `begin` to `end`.
  */
 template <Integer T>
-std::vector<T> print_mersenne_nums_in_interval(const T &begin, const T &end) {
-  std::vector<T> nums = get_mersenne_nums_in_interval(begin, end);
-
+void print_mersenne_nums_in_interval(const T &begin, const T &end) {
   std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  operate_on_mersenne_nums_in_interval(
+      begin, end, std::function<void(const T &)>([](const T &n) -> void {
+        std::cout << n << " ";
+      }));
   std::cout << "}" << std::endl;
 
-  return nums;
+  return;
 }
 
 #endif // !UTILS_MERSENNE_HPP
