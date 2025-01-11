@@ -55,8 +55,6 @@ get_perfect_nums_in_range(const std::ranges::iota_view<T, T> &range) {
   // clang-format on
 
   return res;
-
-  return res;
 }
 
 /**
