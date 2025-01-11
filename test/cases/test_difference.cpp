@@ -1,4 +1,3 @@
-#include "./test_difference.hpp"
 #include "../../src/utils/set_math.hpp"
 #include <gtest/gtest.h>
 

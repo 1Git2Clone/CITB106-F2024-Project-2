@@ -1,4 +1,3 @@
-#include "./test_perfect_numbers.hpp"
 #include "../../src/utils/perfect_nums.hpp"
 
 #include <climits>

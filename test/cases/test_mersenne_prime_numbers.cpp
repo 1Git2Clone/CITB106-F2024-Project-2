@@ -1,4 +1,3 @@
-#include "./test_mersenne_prime_numbers.hpp"
 #include "../../src/utils/mersenne.hpp"
 #include <gtest/gtest.h>
 

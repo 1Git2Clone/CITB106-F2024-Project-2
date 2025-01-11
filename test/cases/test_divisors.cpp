@@ -1,4 +1,3 @@
-#include "./test_divisors.hpp"
 #include "../../src/utils/divisors.hpp"
 #include "../../src/utils/primes.hpp"
 #include <climits>

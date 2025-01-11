@@ -1,5 +1,3 @@
-#include "./test_prime_factors.hpp"
-
 #include "../../src/utils/primes.hpp"
 
 #include <gtest/gtest.h>
