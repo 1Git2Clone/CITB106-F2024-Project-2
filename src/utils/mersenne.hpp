@@ -94,20 +94,34 @@ std::vector<T> print_first_n_amount_of_mersenne_nums(const T &n) {
 // -----------------------------------------------------------------------------
 
 /**
+ * Applies a callback function `f` to the first `n` amount of mersenne prime
+ * numbers.
+ */
+template <Integer T>
+void operate_on_first_n_amount_of_mersenne_prime_nums(
+    const T &n, std::function<void(const T &)> f) {
+  T counter = 0;
+
+  for (T i = 0b11; counter != n; i = (i << 1) + 1) {
+    if (is_prime(i)) {
+      f(i);
+      counter++;
+    }
+  }
+
+  return;
+}
+
+/**
  * Gets the first `n` amount of mersenne prime numbers.
  */
 template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res;
 
-  T counter = 0;
-
-  for (T i = 0b11; counter != n; i = (i << 1) + 1) {
-    if (is_prime(i)) {
-      res.push_back(i);
-      counter++;
-    }
-  }
+  operate_on_first_n_amount_of_mersenne_prime_nums(
+      n,
+      std::function<void(const T &)>([&res](const T &i) { res.push_back(i); }));
 
   return res;
 }
@@ -116,14 +130,14 @@ std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
  * Prints the first `n` amount of mersenne prime numbers.
  */
 template <Integer T>
-std::vector<T> print_first_n_amount_of_mersenne_prime_nums(const T &n) {
-  std::vector<T> nums = get_first_n_amount_of_mersenne_prime_nums(n);
-
+void print_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  operate_on_first_n_amount_of_mersenne_prime_nums(
+      n, std::function<void(const T &)>(
+             [](const T &num) { std::cout << num << " "; }));
   std::cout << "}" << std::endl;
 
-  return nums;
+  return;
 }
 
 // -----------------------------------------------------------------------------
