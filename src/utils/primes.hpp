@@ -4,6 +4,7 @@
 #include "concepts.hpp"
 #include <algorithm>
 #include <cmath>
+#include <functional>
 #include <iostream>
 #include <ranges>
 #include <vector>
@@ -39,36 +40,43 @@ template <Integer T> bool is_prime(const T &n) {
 // -----------------------------------------------------------------------------
 
 /**
+ * Applies a callback function `f` to all the prime factors of a number: `n`.
+ *
+ * ---
+ *
  * Implemented in O(sqrt(n)) space via the segmented sieve of eratosthenes
  * algorithm[1].
  *
  * [1]:
  * https://cp-algorithms.com/algebra/sieve-of-eratosthenes.hpptml#segmented-sieve
  */
-template <Integer T> std::vector<T> get_prime_factors(const T &n) {
+template <Integer T>
+void operate_on_prime_factors(const T &n, std::function<void(const T &)> f) {
   if (n <= 1)
-    return std::vector<T>();
-  if (is_prime(n))
-    return std::vector<T>{n};
+    return;
 
-  std::vector<T> primes;
+  if (is_prime(n)) {
+    f(n);
+    return;
+  }
+
   if (n <= 8) {
     // sqrt(n) < 3
     if (n % 2 == 0)
-      primes.push_back(2);
+      f(2);
     if (n % 3 == 0)
-      primes.push_back(3);
+      f(3);
 
-    return primes;
+    return;
   }
 
   T n_sqrt = static_cast<T>(std::sqrt(n));
   std::vector<bool> is_prime(n_sqrt + 2, true);
 
-  for (const T &i : std::ranges::views::iota((T)2, (T)(n_sqrt + 1))) {
+  for (const T &i : std::ranges::views::iota(static_cast<T>(2), n_sqrt + 1)) {
     if (is_prime[i]) {
       if (n % i == 0) {
-        primes.push_back(i);
+        f(i);
       }
       for (T j = i * i; j <= n_sqrt; j += i) {
         is_prime[j] = false;
@@ -76,21 +84,34 @@ template <Integer T> std::vector<T> get_prime_factors(const T &n) {
     }
   };
 
+  return;
+}
+
+/**
+ * Returns all the prime factors of a number: `n` in a vector.
+ */
+template <Integer T> std::vector<T> get_prime_factors(const T &n) {
+  std::vector<T> primes;
+
+  operate_on_prime_factors(
+      n, std::function<void(const T &)>(
+             [&primes](const T &prime) { primes.push_back(prime); }));
+
   return primes;
 }
 
 /**
- * Gets all the prime fractors from the `get_prime_factors` function and prints
- * them to `stdout`.
+ * Prints all the prime factors of a number: `n` in a vector.
  */
-template <Integer T> std::vector<T> print_prime_factors(const T &n) {
-  std::vector<T> nums = get_prime_factors(n);
-
+template <Integer T> void print_prime_factors(const T &n) {
   std::cout << "{ ";
-  std::ranges::for_each(nums, [](const T &num) { std::cout << num << " "; });
+  operate_on_prime_factors(n,
+                           std::function<void(const T &)>([](const T &prime) {
+                             std::cout << prime << " ";
+                           }));
   std::cout << "}" << std::endl;
 
-  return nums;
+  return;
 }
 
 #endif // !UTILS_PRIMES_HPP
