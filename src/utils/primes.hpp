@@ -2,7 +2,6 @@
 #define UTILS_PRIMES_HPP
 
 #include "concepts.hpp"
-#include <algorithm>
 #include <cmath>
 #include <functional>
 #include <iostream>
