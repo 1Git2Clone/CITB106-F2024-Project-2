@@ -4,6 +4,7 @@
 #include "./primes.hpp"
 
 #include <cmath>
+#include <cstddef>
 #include <functional>
 #include <iostream>
 #include <vector>
@@ -85,9 +86,12 @@ std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
   if (n < 2)
     return res;
 
+  size_t i = 0;
   operate_on_first_n_amount_of_mersenne_nums(
-      n, std::function<void(const T &)>(
-             [&res](const T &num) { res.push_back(num); }));
+      n, std::function<void(const T &)>([&i, &res](const T &num) {
+        res[i] = num;
+        i++;
+      }));
 
   return res;
 }
@@ -135,9 +139,12 @@ template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
   std::vector<T> res(n);
 
+  size_t i = 0;
   operate_on_first_n_amount_of_mersenne_prime_nums(
-      n,
-      std::function<void(const T &)>([&res](const T &i) { res.push_back(i); }));
+      n, std::function<void(const T &)>([&i, &res](const T &num) {
+        res[i] = num;
+        i++;
+      }));
 
   return res;
 }
