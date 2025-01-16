@@ -81,17 +81,16 @@ void operate_on_first_n_amount_of_mersenne_nums(
  */
 template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_nums(const T &n) {
-  std::vector<T> res(n);
+  std::vector<T> res;
 
   if (n < 2)
     return res;
 
-  size_t i = 0;
+  res.reserve(n);
+
   operate_on_first_n_amount_of_mersenne_nums(
-      n, std::function<void(const T &)>([&i, &res](const T &num) {
-        res[i] = num;
-        i++;
-      }));
+      n, std::function<void(const T &)>(
+             [&res](const T &num) { res.push_back(num); }));
 
   return res;
 }
@@ -137,14 +136,12 @@ void operate_on_first_n_amount_of_mersenne_prime_nums(
  */
 template <Integer T>
 std::vector<T> get_first_n_amount_of_mersenne_prime_nums(const T &n) {
-  std::vector<T> res(n);
+  std::vector<T> res;
+  res.reserve(n);
 
-  size_t i = 0;
   operate_on_first_n_amount_of_mersenne_prime_nums(
-      n, std::function<void(const T &)>([&i, &res](const T &num) {
-        res[i] = num;
-        i++;
-      }));
+      n, std::function<void(const T &)>(
+             [&res](const T &num) { res.push_back(num); }));
 
   return res;
 }
